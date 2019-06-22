@@ -11,6 +11,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: HomePage(),
+      theme: ThemeData(
+          primaryColor: Colors.red,
+          buttonColor: Colors.red,
+          floatingActionButtonTheme:
+              FloatingActionButtonThemeData(backgroundColor: Colors.red)),
     );
   }
 }
