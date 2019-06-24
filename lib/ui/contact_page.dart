@@ -28,6 +28,10 @@ final _phoneController = TextEditingController();
     _editedContact = widget.contact == null
         ? Contact()
         : Contact.fromMap(widget.contact.toMap());
+    
+    _nameController.text = _editedContact.name;
+    _emailController.text = _editedContact.email;
+    _phoneController.text = _editedContact.phone;
   }
 
   @override

@@ -30,9 +30,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return ContactPage();
-            }));
+            _showContactPage(context);
           },
           child: Icon(Icons.add),
         ),
@@ -50,6 +48,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _contactCard(BuildContext context, int index) => GestureDetector(
+    onTap: (){
+      _showContactPage(context, contact: contacts[index]);
+    },
         child: Card(
           child: Padding(
             padding: EdgeInsets.all(10),
@@ -91,4 +92,10 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       );
+}
+
+void _showContactPage(context, {Contact contact}) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return ContactPage(contact: contact);
+  }));
 }
