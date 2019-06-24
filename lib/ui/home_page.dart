@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
 
     helper.getAllContacts().then((list) {
       setState(() {
-       contacts = list; 
+        contacts = list;
       });
     });
   }
@@ -37,9 +37,26 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.all(10),
           itemCount: contacts.length,
           itemBuilder: (context, index) {
-
+            return _contactCard(context, index);
           },
-        )
-    );
+        ));
   }
+
+  Widget _contactCard(BuildContext context, int index) => GestureDetector(
+        child: Card(
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  height: 80,
+                  width: 80,
+                  decoration:
+                      BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image:AssetImage("images/person.png") ) ),
+                )
+              ],
+            ),
+          ),
+        ),
+      );
 }
