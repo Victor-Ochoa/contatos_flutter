@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:contatos/helpers/contact_helper.dart';
+import 'package:contatos/ui/contact_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,7 +29,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ContactPage();
+            }));
+          },
           child: Icon(Icons.add),
         ),
         appBar: AppBar(
