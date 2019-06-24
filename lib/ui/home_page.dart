@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:contatos/helpers/contact_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -51,8 +53,33 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   height: 80,
                   width: 80,
-                  decoration:
-                      BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image:AssetImage("images/person.png") ) ),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: contacts[index].img != null
+                              ? FileImage(File(contacts[index].img))
+                              : AssetImage("images/person.png"))),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        contacts[index].name ?? "",
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        contacts[index].phone ?? "",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      Text(
+                        contacts[index].email ?? "",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
