@@ -18,6 +18,8 @@ final _nameController = TextEditingController();
 final _emailController = TextEditingController();
 final _phoneController = TextEditingController();
 
+final _nameFocus = FocusNode();
+
   Contact _editedContact;
   var _userEdit = false;
 
@@ -42,7 +44,13 @@ final _phoneController = TextEditingController();
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          if(_editedContact.name == null || _editedContact.name.isEmpty){
+            FocusScope.of(context).requestFocus(_nameFocus);
+          }else{
+            Navigator.pop(context, _editedContact);
+          }
+        },
         child: Icon(Icons.save),
       ),
       body: SingleChildScrollView(
@@ -65,6 +73,7 @@ final _phoneController = TextEditingController();
             TextField(
               decoration: InputDecoration(labelText: "Nome"),
               controller: _nameController,
+              focusNode: _nameFocus,
               onChanged: (text) {
                 _userEdit = true;
                 setState(() {
