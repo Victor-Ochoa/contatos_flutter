@@ -16,6 +16,10 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
+    _getAllContacts();
+  }
+
+  void _getAllContacts() {
     helper.getAllContacts().then((list) {
       setState(() {
         contacts = list;
@@ -30,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            _showContactPage(context);
+            _showContactPage();
           },
           child: Icon(Icons.add),
         ),
@@ -48,9 +52,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _contactCard(BuildContext context, int index) => GestureDetector(
-    onTap: (){
-      _showContactPage(context, contact: contacts[index]);
-    },
+        onTap: () {
+          _showContactPage(contact: contacts[index]);
+        },
         child: Card(
           child: Padding(
             padding: EdgeInsets.all(10),
@@ -92,10 +96,19 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       );
-}
 
-void _showContactPage(context, {Contact contact}) {
-  Navigator.push(context, MaterialPageRoute(builder: (context) {
-    return ContactPage(contact: contact);
-  }));
+  void _showContactPage({Contact contact}) async {
+    final recContact =
+        await Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ContactPage(contact: contact);
+    }));
+
+    if (recContact == null) return;
+
+    contact != null
+        ? await helper.updateContact(recContact)
+        : await helper.saveContact(recContact);
+
+    _getAllContacts();
+  }
 }
