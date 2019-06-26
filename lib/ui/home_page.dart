@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _contactCard(BuildContext context, int index) => GestureDetector(
         onTap: () {
-          _showContactPage(contact: contacts[index]);
+          _showOptions(context, index);
         },
         child: Card(
           child: Padding(
@@ -110,5 +110,24 @@ class _HomePageState extends State<HomePage> {
         : await helper.saveContact(recContact);
 
     _getAllContacts();
+  }
+
+  void _showOptions(BuildContext context, int index) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return BottomSheet(
+            builder: (context) {
+              return Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    FlatButton(child: "Ligar",)
+                  ],
+                ),
+              );
+            },
+          );
+        });
   }
 }
